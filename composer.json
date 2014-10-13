@@ -1,0 +1,26 @@
+{
+	"name": "ppp/libmodule",
+	"description": "Lib that helps the creation of PHP modules for the PPP",
+	"keywords": [
+		"ppp"
+	],
+	"homepage": "https://github.com/ProjetPP/PPP-LibModule-PHP",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Projet Pensées Profondes",
+			"homepage": "https://github.com/ProjetPP"
+		}
+	],
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"require": {
+		"php": ">=5.3.0",
+		"ppp/data-model": "*"
+	},
+	"autoload": {
+		"psr-4": {
+			"PPP\\Module\\": "src/"
+		}
+	}
+}
