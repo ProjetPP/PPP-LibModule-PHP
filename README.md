@@ -15,7 +15,7 @@ Use one of the below methods:
 
 1 - Use composer to install the library and all its dependencies using the master branch:
 
-    composer require "ppp/libmodule":dev-master"
+    composer require "ppp/libmodule":"dev-master"
 
 2 - Create a composer.json file that just defines a dependency on version 0.2 of this package, and run 'composer install' in the directory:
 
