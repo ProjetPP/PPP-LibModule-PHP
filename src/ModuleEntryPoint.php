@@ -62,7 +62,7 @@ class ModuleEntryPoint {
 
 	private function outputResponse(ModuleResponse $response) {
 		header('Content-type: application/json');
-		echo json_decode($this->buildResponseSerializer()->serialize($response));
+		echo json_encode($this->buildResponseSerializer()->serialize($response));
 	}
 
 	private function buildRequestDeserializer() {
