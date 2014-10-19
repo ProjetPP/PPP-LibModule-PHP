@@ -15,7 +15,7 @@ interface RequestHandler {
 
 	/**
 	 * @param ModuleRequest $request
-	 * @return ModuleResponse
+	 * @return ModuleResponse[]
 	 */
 	public function buildResponse(ModuleRequest $request);
 }
