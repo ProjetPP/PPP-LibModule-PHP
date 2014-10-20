@@ -29,5 +29,19 @@ class ModuleRequestDeserializerTest extends \PHPUnit_Framework_TestCase {
 				'id' => 'a'
 			))
 		);
+		$this->assertEquals(
+			new ModuleRequest(
+				'en',
+				new MissingNode(),
+				'a',
+				array('a')
+			),
+			$deserializer->deserialize(array(
+				'language' => 'en',
+				'tree' => array('type' => 'missing'),
+				'id' => 'a',
+				'trace' => array('a')
+			))
+		);
 	}
 }

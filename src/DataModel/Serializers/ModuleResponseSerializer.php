@@ -44,7 +44,8 @@ class ModuleResponseSerializer implements DispatchableSerializer {
 		return array(
 			'language' => $response->getLanguageCode(),
 			'tree' => $this->nodeSerializer->serialize($response->getSentenceTree()),
-			'pertinence' => $response->getPertinence()
+			'pertinence' => $response->getPertinence(),
+			'trace' => $response->getTrace()
 		);
 	}
 }

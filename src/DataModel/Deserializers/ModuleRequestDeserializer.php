@@ -36,7 +36,8 @@ class ModuleRequestDeserializer implements Deserializer {
 		return new ModuleRequest(
 			$serialization['language'],
 			$this->nodeDeserializer->deserialize($serialization['tree']),
-			$serialization['id']
+			$serialization['id'],
+			array_key_exists('trace', $serialization) ? $serialization['trace'] : array()
 		);
 	}
 

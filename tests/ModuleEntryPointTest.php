@@ -50,7 +50,7 @@ class ModuleEntryPointTest extends \PHPUnit_Framework_TestCase {
 		$tests[] = array(
 			$handlerMock,
 			'{"language":"en", "tree":{"type":"missing"}, "id":"a"}',
-			'[{"language":"en","tree":{"type":"missing"},"pertinence":0.5}]'
+			'[{"language":"en","tree":{"type":"missing"},"pertinence":0.5,"trace":[]}]'
 		);
 
 		return $tests;

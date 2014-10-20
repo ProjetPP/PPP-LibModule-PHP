@@ -20,12 +20,14 @@ class ModuleResponseSerializerTest extends \PHPUnit_Framework_TestCase {
 			array(
 				'language' => 'en',
 				'tree' => array('type' => 'missing'),
-				'pertinence' => 0.5
+				'pertinence' => 0.5,
+				'trace' => array('a')
 			),
 			$serializer->serialize(new ModuleResponse(
 				'en',
 				new MissingNode(),
-				0.5
+				0.5,
+				array('a')
 			))
 		);
 	}

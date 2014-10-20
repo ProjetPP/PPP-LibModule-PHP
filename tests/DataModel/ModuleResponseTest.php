@@ -26,4 +26,9 @@ class ModuleResponseTest extends \PHPUnit_Framework_TestCase {
 		$response = new ModuleResponse('en', new MissingNode(), 0.5);
 		$this->assertEquals(0.5, $response->getPertinence());
 	}
+
+	public function testGetTrace() {
+		$response = new ModuleRequest('en', new MissingNode(), 0.5, array('a'));
+		$this->assertEquals(array('a'), $response->getTrace());
+	}
 }
