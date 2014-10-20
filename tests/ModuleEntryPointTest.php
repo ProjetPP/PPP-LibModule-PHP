@@ -3,6 +3,8 @@
 namespace PPP\Module;
 
 use PPP\DataModel\MissingNode;
+use PPP\DataModel\ResourceNode;
+use PPP\DataModel\TripleNode;
 use PPP\Module\DataModel\ModuleRequest;
 use PPP\Module\DataModel\ModuleResponse;
 
@@ -38,7 +40,7 @@ class ModuleEntryPointTest extends \PHPUnit_Framework_TestCase {
 			->will($this->returnValue(array()));
 		$tests[] = array(
 			$handlerMock,
-			'{"language":"en", "tree":{"type":"missing"}, "id":"a"}',
+			'{"language":"en","tree":{"type":"missing"},"id":"a"}',
 			'[]'
 		);
 
@@ -49,8 +51,28 @@ class ModuleEntryPointTest extends \PHPUnit_Framework_TestCase {
 			->will($this->returnValue(array(new ModuleResponse('en', new MissingNode(), 0.5))));
 		$tests[] = array(
 			$handlerMock,
-			'{"language":"en", "tree":{"type":"missing"}, "id":"a"}',
+			'{"language":"en","tree":{"type":"missing"},"id":"a"}',
 			'[{"language":"en","tree":{"type":"missing"},"pertinence":0.5,"trace":[]}]'
+		);
+
+
+		$handlerMock = $this->getMock('PPP\Module\RequestHandler');
+		$handlerMock->expects($this->any())
+			->method('buildResponse')
+			->with($this->equalTo(new ModuleRequest(
+				'en',
+				new TripleNode(new ResourceNode('s'), new ResourceNode('p'), new ResourceNode('o')),
+				'a'
+			)))
+			->will($this->returnValue(array(new ModuleResponse(
+				'en',
+				new TripleNode(new ResourceNode('s'), new ResourceNode('p'), new ResourceNode('o')),
+				0.5
+			))));
+		$tests[] = array(
+			$handlerMock,
+			'{"language":"en","tree":{"type":"triple","subject":{"type":"resource","value":"s"},"predicate":{"type":"resource","value":"p"},"object":{"type":"resource","value":"o"}},"id":"a"}',
+			'[{"language":"en","tree":{"type":"triple","subject":{"type":"resource","value":"s"},"predicate":{"type":"resource","value":"p"},"object":{"type":"resource","value":"o"}},"pertinence":0.5,"trace":[]}]'
 		);
 
 		return $tests;
