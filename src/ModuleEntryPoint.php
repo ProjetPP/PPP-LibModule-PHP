@@ -48,6 +48,9 @@ class ModuleEntryPoint {
 	}
 
 	private function filterRequestMethod() {
+		if(!array_key_exists('REQUEST_METHOD', $_SERVER)) {
+			return;
+		}
 		if($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 			exit();
 		}
