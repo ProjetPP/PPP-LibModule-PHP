@@ -55,6 +55,16 @@ class ModuleEntryPointTest extends \PHPUnit_Framework_TestCase {
 			'[{"language":"en","tree":{"type":"missing"},"measures":{"accuracy":1},"trace":[]}]'
 		);
 
+		$handlerMock = $this->getMock('PPP\Module\RequestHandler');
+		$handlerMock->expects($this->any())
+			->method('buildResponse')
+			->with($this->equalTo(new ModuleRequest('en', new MissingNode(), 'a', array('accuracy' => 1))))
+			->will($this->returnValue(array(new ModuleResponse('en', new MissingNode()))));
+		$tests[] = array(
+			$handlerMock,
+			'{"language":"en","tree":{"type":"missing"},"measures":{"accuracy":1},"id":"a"}',
+			'[{"language":"en","tree":{"type":"missing"},"measures":{"accuracy":1},"trace":[]}]'
+		);
 
 		$handlerMock = $this->getMock('PPP\Module\RequestHandler');
 		$handlerMock->expects($this->any())

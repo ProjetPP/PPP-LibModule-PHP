@@ -8,6 +8,7 @@ use PPP\DataModel\DeserializerFactory;
 use PPP\DataModel\SerializerFactory;
 use PPP\Module\DataModel\Deserializers\ModuleRequestDeserializer;
 use PPP\Module\DataModel\ModuleRequest;
+use PPP\Module\DataModel\ModuleResponse;
 use PPP\Module\DataModel\Serializers\ModuleResponseSerializer;
 
 /**
@@ -35,7 +36,9 @@ class ModuleEntryPoint {
 	 */
 	public function exec() {
 		try {
-			$this->outputResponse($this->serializeResponse($this->requestHandler->buildResponse($this->getRequest())));
+			$request = $this->getRequest();
+			$responses = $this->requestHandler->buildResponse($request);
+			$this->outputResponse($this->serializeResponse($this->cleanResponses($responses, $request)));
 		} catch(HttpException $e) {
 			header('HTTP/1.1 ' . $e->getCode() . ' ' . $e->getMessage());
 		} catch(Exception $e) {
@@ -60,6 +63,21 @@ class ModuleEntryPoint {
 		return file_get_contents("php://input");
 	}
 
+	private function cleanResponses(array $responses, ModuleRequest $request) {
+		$cleanedResponses = array();
+
+		/** @var ModuleResponse $response */
+		foreach($responses as $response) {
+			$cleanedResponses[] = new ModuleResponse(
+				$response->getLanguageCode(),
+				$response->getSentenceTree(),
+				$response->getMeasures() + $request->getMeasures(),
+				$response->getTrace()
+			);
+		}
+
+		return $cleanedResponses;
+	}
 
 	private function outputResponse($serialization) {
 		@header('Content-type: application/json');
