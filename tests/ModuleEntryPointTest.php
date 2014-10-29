@@ -2,6 +2,7 @@
 
 namespace PPP\Module;
 
+use Exception;
 use PPP\DataModel\MissingNode;
 use PPP\DataModel\ResourceNode;
 use PPP\DataModel\TripleNode;
@@ -86,5 +87,34 @@ class ModuleEntryPointTest extends \PHPUnit_Framework_TestCase {
 		);
 
 		return $tests;
+	}
+
+	public function testWithInvalidRequest() {
+		$handlerMock = $this->getMock('PPP\Module\RequestHandler');
+		$entryPointMock = $this->getMock('PPP\Module\ModuleEntryPoint', array('getRequestBody'), array($handlerMock));
+		$entryPointMock->expects($this->any())
+			->method('getRequestBody')
+			->will($this->returnValue('{}'));
+
+		$entryPointMock->exec();
+
+		$this->expectOutputString('The serialization is invalid!');
+	}
+
+	public function testWithRequestHandlerException() {
+		$handlerMock = $this->getMock('PPP\Module\RequestHandler');
+		$handlerMock->expects($this->any())
+			->method('buildResponse')
+			->with($this->equalTo(new ModuleRequest('en', new MissingNode(), 'a')))
+			->will($this->throwException(new Exception('foo')));
+
+		$entryPointMock = $this->getMock('PPP\Module\ModuleEntryPoint', array('getRequestBody'), array($handlerMock));
+		$entryPointMock->expects($this->any())
+			->method('getRequestBody')
+			->will($this->returnValue('{"language":"en","tree":{"type":"missing"},"id":"a"}'));
+
+		$entryPointMock->exec();
+
+		$this->expectOutputString('foo');
 	}
 }

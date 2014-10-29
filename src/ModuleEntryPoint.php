@@ -40,11 +40,10 @@ class ModuleEntryPoint {
 			$responses = $this->requestHandler->buildResponse($request);
 			$this->outputResponse($this->serializeResponse($this->cleanResponses($responses, $request)));
 		} catch(HttpException $e) {
-			header('HTTP/1.1 ' . $e->getCode() . ' ' . $e->getMessage());
+			$this->outputHttpException($e);
 		} catch(Exception $e) {
-			header('HTTP/1.1 500 Internal Server Error');
+			$this->outputHttpException(new HttpException($e->getMessage(), 500, $e));
 		}
-
 	}
 
 	/**
@@ -55,7 +54,7 @@ class ModuleEntryPoint {
 		try {
 			return $this->buildRequestDeserializer()->deserialize($requestJson);
 		} catch(DeserializationException $e) {
-			throw new HttpException('Bad Request', 400);
+			throw new HttpException($e->getMessage(), 400, $e);
 		}
 	}
 
@@ -97,9 +96,21 @@ class ModuleEntryPoint {
 		return new ModuleRequestDeserializer($deserializerFactory->newNodeDeserializer());
 	}
 
-
 	private function buildResponseSerializer() {
 		$serializerFactory = new SerializerFactory();
 		return new ModuleResponseSerializer($serializerFactory->newNodeSerializer());
+	}
+
+	private function outputHttpException(HttpException $exception) {
+		$this->setHttpResponseCode($exception->getCode());
+		echo $exception->getMessage();
+	}
+
+	private function setHttpResponseCode($code) {
+		if(function_exists('http_response_code')) {
+			http_response_code($code);
+		} else {
+			header('X-PHP-Response-Code: '. $code, true, $code);
+		}
 	}
 }
