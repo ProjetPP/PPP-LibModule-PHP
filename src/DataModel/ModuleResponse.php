@@ -23,9 +23,9 @@ class ModuleResponse {
 	private $sentenceTree;
 
 	/**
-	 * @var float
+	 * @var float[]
 	 */
-	private $pertinence;
+	private $measures;
 
 	/**
 	 * @var string[]
@@ -35,13 +35,13 @@ class ModuleResponse {
 	/**
 	 * @param string $languageCode
 	 * @param AbstractNode $sentenceTree
-	 * @param float $pertinence
+	 * @param float[] $measures
 	 * @param string[] $trace
 	 */
-	public function __construct($languageCode, AbstractNode $sentenceTree, $pertinence, array $trace = array()) {
+	public function __construct($languageCode, AbstractNode $sentenceTree, array $measures = array(), array $trace = array()) {
 		$this->languageCode = $languageCode;
 		$this->sentenceTree = $sentenceTree;
-		$this->pertinence = $pertinence;
+		$this->measures = $measures;
 		$this->trace = $trace;
 	}
 
@@ -60,10 +60,10 @@ class ModuleResponse {
 	}
 
 	/**
-	 * @return float
+	 * @return float[]
 	 */
-	public function getPertinence() {
-		return $this->pertinence;
+	public function getMeasures() {
+		return $this->measures;
 	}
 
 	/**

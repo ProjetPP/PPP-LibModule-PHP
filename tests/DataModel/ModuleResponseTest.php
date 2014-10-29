@@ -13,22 +13,22 @@ use PPP\DataModel\MissingNode;
 class ModuleResponseTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetLanguageCode() {
-		$response = new ModuleResponse('en', new MissingNode(), 0.5);
+		$response = new ModuleResponse('en', new MissingNode());
 		$this->assertEquals('en', $response->getLanguageCode());
 	}
 
 	public function testGetSentenceTree() {
-		$response = new ModuleResponse('en', new MissingNode(), 0.5);
+		$response = new ModuleResponse('en', new MissingNode());
 		$this->assertEquals(new MissingNode(), $response->getSentenceTree());
 	}
 
-	public function testGetPertinence() {
-		$response = new ModuleResponse('en', new MissingNode(), 0.5);
-		$this->assertEquals(0.5, $response->getPertinence());
+	public function testGetMeasures() {
+		$response = new ModuleResponse('en', new MissingNode(), array('accuracy' => 1));
+		$this->assertEquals(array('accuracy' => 1), $response->getMeasures());
 	}
 
 	public function testGetTrace() {
-		$response = new ModuleRequest('en', new MissingNode(), 0.5, array('a'));
+		$response = new ModuleRequest('en', new MissingNode(), array('accuracy' => 1), array('a'));
 		$this->assertEquals(array('a'), $response->getTrace());
 	}
 }
