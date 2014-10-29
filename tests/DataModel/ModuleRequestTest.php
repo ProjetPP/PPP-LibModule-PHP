@@ -13,22 +13,27 @@ use PPP\DataModel\MissingNode;
 class ModuleRequestTest extends \PHPUnit_Framework_TestCase {
 
 	public function testGetLanguageCode() {
-		$response = new ModuleRequest('en', new MissingNode(), 'a');
-		$this->assertEquals('en', $response->getLanguageCode());
+		$request = new ModuleRequest('en', new MissingNode(), 'a');
+		$this->assertEquals('en', $request->getLanguageCode());
 	}
 
 	public function testGetSentenceTree() {
-		$response = new ModuleRequest('en', new MissingNode(), 'a');
-		$this->assertEquals(new MissingNode(), $response->getSentenceTree());
+		$request = new ModuleRequest('en', new MissingNode(), 'a');
+		$this->assertEquals(new MissingNode(), $request->getSentenceTree());
 	}
 
 	public function testGetRequestId() {
-		$response = new ModuleRequest('en', new MissingNode(), 'a');
-		$this->assertEquals('a', $response->getRequestId());
+		$request = new ModuleRequest('en', new MissingNode(), 'a');
+		$this->assertEquals('a', $request->getRequestId());
+	}
+
+	public function testGetMeasures() {
+		$request = new ModuleRequest('en', new MissingNode(), 'a', array('accuracy' => 1), array('a'));
+		$this->assertEquals(array('accuracy' => 1), $request->getMeasures());
 	}
 
 	public function testGetTrace() {
-		$response = new ModuleRequest('en', new MissingNode(), 'a', array('a'));
-		$this->assertEquals(array('a'), $response->getTrace());
+		$request = new ModuleRequest('en', new MissingNode(), 'a', array('accuracy' => 1), array('a'));
+		$this->assertEquals(array('a'), $request->getTrace());
 	}
 }

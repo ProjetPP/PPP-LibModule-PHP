@@ -34,6 +34,7 @@ class ModuleRequestDeserializerTest extends \PHPUnit_Framework_TestCase {
 				'en',
 				new MissingNode(),
 				'a',
+				array(),
 				array('a')
 			),
 			$deserializer->deserialize(array(
@@ -41,6 +42,20 @@ class ModuleRequestDeserializerTest extends \PHPUnit_Framework_TestCase {
 				'tree' => array('type' => 'missing'),
 				'id' => 'a',
 				'trace' => array('a')
+			))
+		);
+		$this->assertEquals(
+			new ModuleRequest(
+				'en',
+				new MissingNode(),
+				'a',
+				array('accuracy' => 1)
+			),
+			$deserializer->deserialize(array(
+				'language' => 'en',
+				'tree' => array('type' => 'missing'),
+				'id' => 'a',
+				'measures' => array('accuracy' => 1)
 			))
 		);
 	}

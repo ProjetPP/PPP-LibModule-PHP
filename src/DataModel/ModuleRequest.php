@@ -28,6 +28,11 @@ class ModuleRequest {
 	private $requestId;
 
 	/**
+	 * @var float[]
+	 */
+	private $measures;
+
+	/**
 	 * @var string[]
 	 */
 	private $trace;
@@ -36,12 +41,14 @@ class ModuleRequest {
 	 * @param string $languageCode
 	 * @param AbstractNode $sentenceTree
 	 * @param string $requestId
+	 * @param float[] $measures
 	 * @param string[] $trace
 	 */
-	public function __construct($languageCode, AbstractNode $sentenceTree, $requestId, array $trace = array()) {
+	public function __construct($languageCode, AbstractNode $sentenceTree, $requestId, array $measures = array(), array $trace = array()) {
 		$this->languageCode = $languageCode;
 		$this->sentenceTree = $sentenceTree;
 		$this->requestId = $requestId;
+		$this->measures = $measures;
 		$this->trace = $trace;
 	}
 
@@ -64,6 +71,13 @@ class ModuleRequest {
 	 */
 	public function getRequestId() {
 		return $this->requestId;
+	}
+
+	/**
+	 * @return float[]
+	 */
+	public function getMeasures() {
+		return $this->measures;
 	}
 
 	/**
