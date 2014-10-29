@@ -20,7 +20,7 @@ class ModuleResponseSerializerTest extends \PHPUnit_Framework_TestCase {
 			array(
 				'language' => 'en',
 				'tree' => array('type' => 'missing'),
-				'measures' => array('accuracy' => 1),
+				'measures' => (object) array('accuracy' => 1),
 				'trace' => array('a')
 			),
 			$serializer->serialize(new ModuleResponse(
