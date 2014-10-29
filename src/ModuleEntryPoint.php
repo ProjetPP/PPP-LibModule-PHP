@@ -55,7 +55,7 @@ class ModuleEntryPoint {
 			exit();
 		}
 		if($_SERVER['REQUEST_METHOD'] !== 'POST') {
-			new HttpException('Bad request method: ' . $_SERVER['REQUEST_METHOD'], 500);
+			new HttpException('Bad request method: ' . $_SERVER['REQUEST_METHOD'], 405);
 		}
 	}
 
