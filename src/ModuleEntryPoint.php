@@ -36,6 +36,7 @@ class ModuleEntryPoint {
 	 */
 	public function exec() {
 		try {
+			$this->filterRequestMethod();
 			$request = $this->getRequest();
 			$responses = $this->requestHandler->buildResponse($request);
 			$this->outputResponse($this->serializeResponse($this->cleanResponses($responses, $request)));
@@ -43,6 +44,15 @@ class ModuleEntryPoint {
 			$this->outputHttpException($e);
 		} catch(Exception $e) {
 			$this->outputHttpException(new HttpException($e->getMessage(), 500, $e));
+		}
+	}
+
+	private function filterRequestMethod() {
+		if($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+			exit();
+		}
+		if($_SERVER['REQUEST_METHOD'] !== 'POST') {
+			new HttpException('Bad request method: ' . $_SERVER['REQUEST_METHOD'], 500);
 		}
 	}
 
