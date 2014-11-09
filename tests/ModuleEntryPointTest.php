@@ -4,7 +4,7 @@ namespace PPP\Module;
 
 use Exception;
 use PPP\DataModel\MissingNode;
-use PPP\DataModel\ResourceNode;
+use PPP\DataModel\StringResourceNode;
 use PPP\DataModel\TripleNode;
 use PPP\Module\DataModel\ModuleRequest;
 use PPP\Module\DataModel\ModuleResponse;
@@ -72,18 +72,18 @@ class ModuleEntryPointTest extends \PHPUnit_Framework_TestCase {
 			->method('buildResponse')
 			->with($this->equalTo(new ModuleRequest(
 				'en',
-				new TripleNode(new ResourceNode('s'), new ResourceNode('p'), new ResourceNode('o')),
+				new TripleNode(new StringResourceNode('s'), new StringResourceNode('p'), new StringResourceNode('o')),
 				'a'
 			)))
 			->will($this->returnValue(array(new ModuleResponse(
 				'en',
-				new TripleNode(new ResourceNode('s'), new ResourceNode('p'), new ResourceNode('o')),
+				new TripleNode(new StringResourceNode('s'), new StringResourceNode('p'), new StringResourceNode('o')),
 				array('accuracy' => 1)
 			))));
 		$tests[] = array(
 			$handlerMock,
-			'{"language":"en","tree":{"type":"triple","subject":{"type":"resource","value":"s"},"predicate":{"type":"resource","value":"p"},"object":{"type":"resource","value":"o"}},"id":"a"}',
-			'[{"language":"en","tree":{"type":"triple","subject":{"type":"resource","value":"s"},"predicate":{"type":"resource","value":"p"},"object":{"type":"resource","value":"o"}},"measures":{"accuracy":1},"trace":[]}]'
+			'{"language":"en","tree":{"type":"triple","subject":{"type":"resource","value":"s","value-type":"string"},"predicate":{"type":"resource","value":"p","value-type":"string"},"object":{"type":"resource","value":"o","value-type":"string"}},"id":"a"}',
+			'[{"language":"en","tree":{"type":"triple","subject":{"type":"resource","value":"s","value-type":"string"},"predicate":{"type":"resource","value":"p","value-type":"string"},"object":{"type":"resource","value":"o","value-type":"string"}},"measures":{"accuracy":1},"trace":[]}]'
 		);
 
 		return $tests;
