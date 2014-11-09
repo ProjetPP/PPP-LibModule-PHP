@@ -49,22 +49,22 @@ class ModuleEntryPointTest extends \PHPUnit_Framework_TestCase {
 		$handlerMock->expects($this->any())
 			->method('buildResponse')
 			->with($this->equalTo(new ModuleRequest('en', new MissingNode(), 'a')))
-			->will($this->returnValue(array(new ModuleResponse('en', new MissingNode(), array('accuracy' => 1)))));
+			->will($this->returnValue(array(new ModuleResponse('en', new StringResourceNode('p'), array('accuracy' => 1)))));
 		$tests[] = array(
 			$handlerMock,
 			'{"language":"en","tree":{"type":"missing"},"id":"a"}',
-			'[{"language":"en","tree":{"type":"missing"},"measures":{"accuracy":1},"trace":[]}]'
+			'[{"language":"en","tree":{"type":"resource","value":"p","value-type":"string"},"measures":{"accuracy":1},"trace":[]}]'
 		);
 
 		$handlerMock = $this->getMock('PPP\Module\RequestHandler');
 		$handlerMock->expects($this->any())
 			->method('buildResponse')
 			->with($this->equalTo(new ModuleRequest('en', new MissingNode(), 'a', array('accuracy' => 1))))
-			->will($this->returnValue(array(new ModuleResponse('en', new MissingNode()))));
+			->will($this->returnValue(array(new ModuleResponse('en', new StringResourceNode('p')))));
 		$tests[] = array(
 			$handlerMock,
 			'{"language":"en","tree":{"type":"missing"},"measures":{"accuracy":1},"id":"a"}',
-			'[{"language":"en","tree":{"type":"missing"},"measures":{"accuracy":1},"trace":[]}]'
+			'[{"language":"en","tree":{"type":"resource","value":"p","value-type":"string"},"measures":{"accuracy":1},"trace":[]}]'
 		);
 
 		$handlerMock = $this->getMock('PPP\Module\RequestHandler');
@@ -77,13 +77,13 @@ class ModuleEntryPointTest extends \PHPUnit_Framework_TestCase {
 			)))
 			->will($this->returnValue(array(new ModuleResponse(
 				'en',
-				new TripleNode(new StringResourceNode('s'), new StringResourceNode('p'), new StringResourceNode('o')),
+				new TripleNode(new StringResourceNode('s1'), new StringResourceNode('p1'), new StringResourceNode('o1')),
 				array('accuracy' => 1)
 			))));
 		$tests[] = array(
 			$handlerMock,
 			'{"language":"en","tree":{"type":"triple","subject":{"type":"resource","value":"s","value-type":"string"},"predicate":{"type":"resource","value":"p","value-type":"string"},"object":{"type":"resource","value":"o","value-type":"string"}},"id":"a"}',
-			'[{"language":"en","tree":{"type":"triple","subject":{"type":"resource","value":"s","value-type":"string"},"predicate":{"type":"resource","value":"p","value-type":"string"},"object":{"type":"resource","value":"o","value-type":"string"}},"measures":{"accuracy":1},"trace":[]}]'
+			'[{"language":"en","tree":{"type":"triple","subject":{"type":"resource","value":"s1","value-type":"string"},"predicate":{"type":"resource","value":"p1","value-type":"string"},"object":{"type":"resource","value":"o1","value-type":"string"}},"measures":{"accuracy":1},"trace":[]}]'
 		);
 
 		return $tests;
