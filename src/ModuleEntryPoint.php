@@ -84,6 +84,13 @@ class ModuleEntryPoint {
 				continue;
 			}
 
+			/** @var ModuleResponse $existingResponse */
+			foreach($cleanedResponses as $existingResponse) {
+				if($existingResponse->getSentenceTree()->equals($response->getSentenceTree())) {
+					continue 2;
+				}
+			}
+
 			$cleanedResponses[] = new ModuleResponse(
 				$response->getLanguageCode(),
 				$response->getSentenceTree(),
