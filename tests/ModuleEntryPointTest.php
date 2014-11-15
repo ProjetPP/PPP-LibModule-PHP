@@ -34,7 +34,7 @@ class ModuleEntryPointTest extends \PHPUnit_Framework_TestCase {
 	public function responsesProvider() {
 		$tests = array();
 
-		$handlerMock = $this->getMock('PPP\Module\RequestHandler');
+		$handlerMock = $this->getMockForAbstractClass('PPP\Module\AbstractRequestHandler');
 		$handlerMock->expects($this->any())
 			->method('buildResponse')
 			->with($this->equalTo(new ModuleRequest('en', new MissingNode(), 'a')))
@@ -45,7 +45,7 @@ class ModuleEntryPointTest extends \PHPUnit_Framework_TestCase {
 			'[]'
 		);
 
-		$handlerMock = $this->getMock('PPP\Module\RequestHandler');
+		$handlerMock = $this->getMockForAbstractClass('PPP\Module\AbstractRequestHandler');
 		$handlerMock->expects($this->any())
 			->method('buildResponse')
 			->with($this->equalTo(new ModuleRequest('en', new MissingNode(), 'a')))
@@ -56,7 +56,7 @@ class ModuleEntryPointTest extends \PHPUnit_Framework_TestCase {
 			'[{"language":"en","tree":{"type":"resource","value":"p","value-type":"string"},"measures":{"accuracy":1},"trace":[]}]'
 		);
 
-		$handlerMock = $this->getMock('PPP\Module\RequestHandler');
+		$handlerMock = $this->getMockForAbstractClass('PPP\Module\AbstractRequestHandler');
 		$handlerMock->expects($this->any())
 			->method('buildResponse')
 			->with($this->equalTo(new ModuleRequest('en', new MissingNode(), 'a')))
@@ -70,7 +70,7 @@ class ModuleEntryPointTest extends \PHPUnit_Framework_TestCase {
 			'[{"language":"en","tree":{"type":"resource","value":"p","value-type":"string"},"measures":{"accuracy":1},"trace":[]}]'
 		);
 
-		$handlerMock = $this->getMock('PPP\Module\RequestHandler');
+		$handlerMock = $this->getMockForAbstractClass('PPP\Module\AbstractRequestHandler');
 		$handlerMock->expects($this->any())
 			->method('buildResponse')
 			->with($this->equalTo(new ModuleRequest('en', new MissingNode(), 'a', array('accuracy' => 1))))
@@ -81,7 +81,7 @@ class ModuleEntryPointTest extends \PHPUnit_Framework_TestCase {
 			'[{"language":"en","tree":{"type":"resource","value":"p","value-type":"string"},"measures":{"accuracy":1},"trace":[]}]'
 		);
 
-		$handlerMock = $this->getMock('PPP\Module\RequestHandler');
+		$handlerMock = $this->getMockForAbstractClass('PPP\Module\AbstractRequestHandler');
 		$handlerMock->expects($this->any())
 			->method('buildResponse')
 			->with($this->equalTo(new ModuleRequest(
@@ -104,7 +104,7 @@ class ModuleEntryPointTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testWithInvalidRequest() {
-		$handlerMock = $this->getMock('PPP\Module\RequestHandler');
+		$handlerMock = $this->getMockForAbstractClass('PPP\Module\AbstractRequestHandler');
 		$entryPointMock = $this->getMock('PPP\Module\ModuleEntryPoint', array('getRequestBody'), array($handlerMock));
 		$entryPointMock->expects($this->any())
 			->method('getRequestBody')
@@ -116,7 +116,7 @@ class ModuleEntryPointTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testWithRequestHandlerException() {
-		$handlerMock = $this->getMock('PPP\Module\RequestHandler');
+		$handlerMock = $this->getMockForAbstractClass('PPP\Module\AbstractRequestHandler');
 		$handlerMock->expects($this->any())
 			->method('buildResponse')
 			->with($this->equalTo(new ModuleRequest('en', new MissingNode(), 'a')))

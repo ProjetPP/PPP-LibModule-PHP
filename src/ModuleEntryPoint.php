@@ -20,7 +20,7 @@ use PPP\Module\DataModel\Serializers\ModuleResponseSerializer;
 class ModuleEntryPoint {
 
 	/**
-	 * @var requestHandler
+	 * @var RequestHandler
 	 */
 	private $requestHandler;
 
@@ -116,12 +116,12 @@ class ModuleEntryPoint {
 	}
 
 	private function buildRequestDeserializer() {
-		$deserializerFactory = new DeserializerFactory();
+		$deserializerFactory = new DeserializerFactory($this->requestHandler->getCustomNodeDeserializers());
 		return new ModuleRequestDeserializer($deserializerFactory->newNodeDeserializer());
 	}
 
 	private function buildResponseSerializer() {
-		$serializerFactory = new SerializerFactory();
+		$serializerFactory = new SerializerFactory($this->requestHandler->getCustomNodeSerializers());
 		return new ModuleResponseSerializer($serializerFactory->newNodeSerializer());
 	}
 
