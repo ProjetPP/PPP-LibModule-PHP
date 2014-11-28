@@ -1,6 +1,6 @@
 <?php
 
-namespace PPP\Wikidata\SentenceTreeSimplifier;
+namespace PPP\Module\TreeSimplifier;
 
 use RuntimeException;
 
