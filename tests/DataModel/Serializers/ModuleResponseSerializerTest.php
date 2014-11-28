@@ -2,8 +2,8 @@
 
 namespace PPP\Module\DataModel\Serializers;
 
-use PPP\DataModel\Serializers\MissingNodeSerializer;
 use PPP\DataModel\MissingNode;
+use PPP\DataModel\Serializers\MissingNodeSerializer;
 use PPP\Module\DataModel\ModuleResponse;
 
 /**

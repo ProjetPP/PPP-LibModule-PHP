@@ -2,7 +2,6 @@
 
 namespace PPP\Module\TreeSimplifier;
 
-use PPP\DataModel\IntersectionNode;
 use PPP\DataModel\ResourceListNode;
 use PPP\DataModel\StringResourceNode;
 use PPP\DataModel\UnionNode;
