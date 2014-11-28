@@ -27,6 +27,7 @@ class NodeSimplifierFactory {
 			array_merge(
 				$additionalSimplifiers,
 				array(
+					new IntersectionNodeSimplifier($this),
 					new UnionNodeSimplifier($this)
 				)
 			)
