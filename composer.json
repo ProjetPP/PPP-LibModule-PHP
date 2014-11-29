@@ -21,6 +21,7 @@
 	"autoload": {
 		"psr-4": {
 			"PPP\\Module\\": "src/"
-		}
+		},
+		"classmap": ["tests/TreeSimplifier/NodeSimplifierBaseTest.php"]
 	}
 }
