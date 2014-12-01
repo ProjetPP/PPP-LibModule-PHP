@@ -9,6 +9,9 @@ use PPP\DataModel\ResourceListNode;
 use PPP\DataModel\ResourceNode;
 use PPP\DataModel\TripleNode;
 
+/**
+ * @deprecated you should implement directly Dispatching simplifier without taking care of recursion
+ */
 abstract class AbstractTripleNodeSimplifier implements NodeSimplifier {
 
 	/**

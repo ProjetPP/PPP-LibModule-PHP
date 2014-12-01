@@ -28,7 +28,8 @@ class NodeSimplifierFactory {
 				$additionalSimplifiers,
 				array(
 					new IntersectionNodeSimplifier($this),
-					new UnionNodeSimplifier($this)
+					new UnionNodeSimplifier($this),
+					new RecursiveTripleNodeSimplifier($this)
 				)
 			)
 		);

@@ -2,8 +2,10 @@
 
 namespace PPP\Module\TreeSimplifier;
 
+use PPP\DataModel\IntersectionNode;
+use PPP\DataModel\MissingNode;
 use PPP\DataModel\ResourceListNode;
-use PPP\DataModel\StringResourceNode;
+use PPP\DataModel\TripleNode;
 use PPP\DataModel\UnionNode;
 
 /**
@@ -18,14 +20,18 @@ class NodeSimplifierFactoryTest extends \PHPUnit_Framework_TestCase {
 		$factory = new NodeSimplifierFactory();
 
 		$this->assertEquals(
-			new ResourceListNode(array(
-				new StringResourceNode('foo'),
-				new StringResourceNode('bar')
-			)),
-			$factory->newNodeSimplifier()->simplify(new UnionNode(array(
-				new ResourceListNode(array(new StringResourceNode('foo'))),
-				new ResourceListNode(array(new StringResourceNode('bar')))
-			)))
+			new TripleNode(
+				new ResourceListNode(),
+				new resourceListNode(),
+				new MissingNode()
+			),
+			$factory->newNodeSimplifier()->simplify(new TripleNode(
+				new UnionNode(array()),
+				new IntersectionNode(array(
+					new ResourceListNode()
+				)),
+				new MissingNode()
+			))
 		);
 	}
 }
