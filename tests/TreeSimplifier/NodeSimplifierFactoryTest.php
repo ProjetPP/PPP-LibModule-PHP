@@ -23,8 +23,8 @@ class NodeSimplifierFactoryTest extends \PHPUnit_Framework_TestCase {
 				new StringResourceNode('bar')
 			)),
 			$factory->newNodeSimplifier()->simplify(new UnionNode(array(
-				new StringResourceNode('foo'),
-				new StringResourceNode('bar')
+				new ResourceListNode(array(new StringResourceNode('foo'))),
+				new ResourceListNode(array(new StringResourceNode('bar')))
 			)))
 		);
 	}

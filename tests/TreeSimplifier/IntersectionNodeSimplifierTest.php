@@ -47,14 +47,14 @@ class IntersectionNodeSimplifierTest extends NodeSimplifierBaseTest {
 						new StringResourceNode('foo'),
 						new StringResourceNode('bar')
 					)),
-					new StringResourceNode('foo')
+					new ResourceListNode(array(new StringResourceNode('foo')))
 				))
 			),
 			array(
 				new ResourceListNode(),
 				new IntersectionNode(array(
-					new StringResourceNode('foo'),
-					new StringResourceNode('bar')
+					new ResourceListNode(array(new StringResourceNode('foo'))),
+					new ResourceListNode(array(new StringResourceNode('bar')))
 				))
 			),
 			array(
@@ -66,11 +66,11 @@ class IntersectionNodeSimplifierTest extends NodeSimplifierBaseTest {
 				)),
 				new IntersectionNode(array(
 					new IntersectionNode(array(
-						new StringResourceNode('foo'),
-						new StringResourceNode('foo')
+						new ResourceListNode(array(new StringResourceNode('foo'))),
+						new ResourceListNode(array(new StringResourceNode('foo')))
 					)),
 					new MissingNode(),
-					new StringResourceNode('foo')
+					new ResourceListNode(array(new StringResourceNode('foo')))
 				))
 			),
 			array(

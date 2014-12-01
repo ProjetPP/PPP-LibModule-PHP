@@ -48,9 +48,7 @@ class IntersectionNodeSimplifier implements NodeSimplifier {
 
 		foreach($node->getOperands() as $operand) {
 			$operand = $nodeSimplifier->simplify($operand);
-			if($operand instanceof ResourceNode) {
-				$resourceLists[] = new ResourceListNode(array($operand));
-			} else if($operand instanceof ResourceListNode) {
+			if($operand instanceof ResourceListNode) {
 				$resourceLists[] = $operand;
 			} else {
 				$otherOperands[] = $operand;
@@ -73,7 +71,6 @@ class IntersectionNodeSimplifier implements NodeSimplifier {
 
 	private function doIntersection(array $lists) {
 		$result = iterator_to_array(reset($lists));
-		$length = count($lists);
 		foreach($lists as $list) {
 			$result = $this->intersect($result, $list);
 		}

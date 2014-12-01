@@ -4,6 +4,7 @@ namespace PPP\Module;
 
 use Exception;
 use PPP\DataModel\MissingNode;
+use PPP\DataModel\ResourceListNode;
 use PPP\DataModel\StringResourceNode;
 use PPP\DataModel\TripleNode;
 use PPP\Module\DataModel\ModuleRequest;
@@ -49,7 +50,11 @@ class ModuleEntryPointTest extends \PHPUnit_Framework_TestCase {
 		$handlerMock->expects($this->any())
 			->method('buildResponse')
 			->with($this->equalTo(new ModuleRequest('en', new MissingNode(), 'a')))
-			->will($this->returnValue(array(new ModuleResponse('en', new StringResourceNode('p'), array('accuracy' => 1)))));
+			->will($this->returnValue(array(new ModuleResponse(
+				'en',
+				new ResourceListNode(array(new StringResourceNode('p'))),
+				array('accuracy' => 1)
+			))));
 		$tests[] = array(
 			$handlerMock,
 			'{"language":"en","tree":{"type":"missing"},"id":"a"}',
@@ -61,8 +66,16 @@ class ModuleEntryPointTest extends \PHPUnit_Framework_TestCase {
 			->method('buildResponse')
 			->with($this->equalTo(new ModuleRequest('en', new MissingNode(), 'a')))
 			->will($this->returnValue(array(
-				new ModuleResponse('en', new StringResourceNode('p'), array('accuracy' => 1)),
-				new ModuleResponse('en', new StringResourceNode('p'), array('accuracy' => 0.9))
+				new ModuleResponse(
+					'en',
+					new ResourceListNode(array(new StringResourceNode('p'))),
+					array('accuracy' => 1)
+				),
+				new ModuleResponse(
+					'en',
+					new ResourceListNode(array(new StringResourceNode('p'))),
+					array('accuracy' => 0.9)
+				)
 			)));
 		$tests[] = array(
 			$handlerMock,
@@ -74,7 +87,7 @@ class ModuleEntryPointTest extends \PHPUnit_Framework_TestCase {
 		$handlerMock->expects($this->any())
 			->method('buildResponse')
 			->with($this->equalTo(new ModuleRequest('en', new MissingNode(), 'a', array('accuracy' => 1))))
-			->will($this->returnValue(array(new ModuleResponse('en', new StringResourceNode('p')))));
+			->will($this->returnValue(array(new ModuleResponse('en', new ResourceListNode(array(new StringResourceNode('p')))))));
 		$tests[] = array(
 			$handlerMock,
 			'{"language":"en","tree":{"type":"missing"},"measures":{"accuracy":1},"id":"a"}',
@@ -86,12 +99,20 @@ class ModuleEntryPointTest extends \PHPUnit_Framework_TestCase {
 			->method('buildResponse')
 			->with($this->equalTo(new ModuleRequest(
 				'en',
-				new TripleNode(new StringResourceNode('s'), new StringResourceNode('p'), new StringResourceNode('o')),
+				new TripleNode(
+					new ResourceListNode(array(new StringResourceNode('s'))),
+					new ResourceListNode(array(new StringResourceNode('p'))),
+					new ResourceListNode(array(new StringResourceNode('o')))
+				),
 				'a'
 			)))
 			->will($this->returnValue(array(new ModuleResponse(
 				'en',
-				new TripleNode(new StringResourceNode('s1'), new StringResourceNode('p1'), new StringResourceNode('o1')),
+				new TripleNode(
+					new ResourceListNode(array(new StringResourceNode('s1'))),
+					new ResourceListNode(array(new StringResourceNode('p1'))),
+					new ResourceListNode(array(new StringResourceNode('o1')))
+				),
 				array('accuracy' => 1)
 			))));
 		$tests[] = array(

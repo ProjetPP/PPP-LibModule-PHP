@@ -48,7 +48,7 @@ class UnionNodeSimplifier implements NodeSimplifier {
 
 		foreach($node->getOperands() as $operand) {
 			$operand = $nodeSimplifier->simplify($operand);
-			if($operand instanceof ResourceNode || $operand instanceof ResourceListNode) {
+			if($operand instanceof ResourceListNode) {
 				$resources[] = $operand;
 			} else {
 				$otherOperands[] = $operand;

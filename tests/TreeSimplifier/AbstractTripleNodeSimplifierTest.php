@@ -49,7 +49,7 @@ class AbstractTripleNodeSimplifierTest extends NodeSimplifierBaseTest {
 		return array(
 			array(
 				new MissingNode(),
-				new TripleNode(new ResourceListNode(array()), new StringResourceNode('aa'), new MissingNode())
+				new TripleNode(new ResourceListNode(array()), new ResourceListNode(array(new StringResourceNode('aa'))), new MissingNode())
 			),
 			array(
 				new TripleNode(new SentenceNode(''), new MissingNode(), new MissingNode()),

@@ -44,7 +44,7 @@ class UnionNodeSimplifierTest extends NodeSimplifierBaseTest {
 					new StringResourceNode('bar')
 				)),
 				new UnionNode(array(
-					new StringResourceNode('foo'),
+					new ResourceListNode(array(new StringResourceNode('foo'))),
 					new ResourceListNode(array(
 						new StringResourceNode('foo'),
 						new StringResourceNode('bar')
@@ -56,15 +56,13 @@ class UnionNodeSimplifierTest extends NodeSimplifierBaseTest {
 					new MissingNode(),
 					new ResourceListNode(array(
 						new StringResourceNode('foo'),
-						new StringResourceNode('bar'),
-						new StringResourceNode('oo')
+						new StringResourceNode('bar')
 					))
 				)),
 				new UnionNode(array(
-					new StringResourceNode('foo'),
-					new StringResourceNode('bar'),
+					new ResourceListNode(array(new StringResourceNode('foo'))),
 					new MissingNode(),
-					new StringResourceNode('oo')
+					new ResourceListNode(array(new StringResourceNode('bar')))
 				))
 			),
 			array(
@@ -73,7 +71,7 @@ class UnionNodeSimplifierTest extends NodeSimplifierBaseTest {
 				)),
 				new UnionNode(array(
 					new UnionNode(array(
-						new StringResourceNode('bar')
+						new ResourceListNode(array(new StringResourceNode('bar')))
 					))
 				))
 			)
