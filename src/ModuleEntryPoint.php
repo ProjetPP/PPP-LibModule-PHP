@@ -116,12 +116,12 @@ class ModuleEntryPoint {
 	}
 
 	private function buildRequestDeserializer() {
-		$deserializerFactory = new DeserializerFactory($this->requestHandler->getCustomNodeDeserializers());
+		$deserializerFactory = new DeserializerFactory($this->requestHandler->getCustomResourceNodeDeserializers());
 		return new ModuleRequestDeserializer($deserializerFactory->newNodeDeserializer());
 	}
 
 	private function buildResponseSerializer() {
-		$serializerFactory = new SerializerFactory($this->requestHandler->getCustomNodeSerializers());
+		$serializerFactory = new SerializerFactory($this->requestHandler->getCustomResourceNodeSerializers());
 		return new ModuleResponseSerializer($serializerFactory->newNodeSerializer());
 	}
 

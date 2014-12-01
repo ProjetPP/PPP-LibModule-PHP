@@ -11,16 +11,16 @@ namespace PPP\Module;
 abstract class AbstractRequestHandler implements RequestHandler {
 
 	/**
-	 * @see RequestHandler::getCustomNodeSerializers
+	 * @see RequestHandler::getCustomResourceNodeSerializers
 	 */
-	public function getCustomNodeSerializers() {
+	public function getCustomResourceNodeSerializers() {
 		return array();
 	}
 
 	/**
 	 * @see RequestHandler::getCustomNodeDeserializers
 	 */
-	public function getCustomNodeDeserializers() {
+	public function getCustomResourceNodeDeserializers() {
 		return array();
 	}
 }

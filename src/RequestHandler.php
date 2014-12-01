@@ -22,16 +22,16 @@ interface RequestHandler {
 	public function buildResponse(ModuleRequest $request);
 
 	/**
-	 * Returns serializers for custom nodes of the module
+	 * Returns serializers for custom resource nodes of the module
 	 *
 	 * @return Serializer[]
 	 */
-	public function getCustomNodeSerializers();
+	public function getCustomResourceNodeSerializers();
 
 	/**
-	 * Returns deserializers for custom nodes of the module
+	 * Returns deserializers for custom resource nodes of the module
 	 *
 	 * @return Deserializer[]
 	 */
-	public function getCustomNodeDeserializers();
+	public function getCustomResourceNodeDeserializers();
 }
