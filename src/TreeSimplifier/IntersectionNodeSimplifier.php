@@ -60,7 +60,7 @@ class IntersectionNodeSimplifier implements NodeSimplifier {
 
 		$resourceList = $this->doIntersection($resourceLists);
 
-		if(empty($otherOperands) || $resourceList->count() === 0) {
+		if(empty($otherOperands) || $resourceList->isEmpty()) {
 			return $resourceList;
 		}
 
@@ -69,7 +69,7 @@ class IntersectionNodeSimplifier implements NodeSimplifier {
 	}
 
 	private function doIntersection(array $lists) {
-		$result = iterator_to_array(reset($lists));
+		$result = reset($lists)->toArray();
 		foreach($lists as $list) {
 			$result = $this->intersect($result, $list);
 		}
