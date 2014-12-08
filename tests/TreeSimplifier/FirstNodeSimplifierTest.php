@@ -3,6 +3,7 @@
 namespace PPP\Module\TreeSimplifier;
 
 use PPP\DataModel\IntersectionNode;
+use PPP\DataModel\MissingNode;
 use PPP\DataModel\ResourceListNode;
 use PPP\DataModel\StringResourceNode;
 use PPP\DataModel\FirstNode;
@@ -49,7 +50,11 @@ class FirstNodeSimplifierTest extends NodeSimplifierBaseTest {
 			array(
 				new ResourceListNode(array()),
 				new FirstNode(new ResourceListNode(array()))
-			)
+			),
+			array(
+				new FirstNode(new MissingNode()),
+				new FirstNode(new MissingNode())
+			),
 		);
 	}
 }

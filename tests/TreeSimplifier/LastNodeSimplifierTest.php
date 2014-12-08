@@ -3,6 +3,7 @@
 namespace PPP\Module\TreeSimplifier;
 
 use PPP\DataModel\IntersectionNode;
+use PPP\DataModel\MissingNode;
 use PPP\DataModel\ResourceListNode;
 use PPP\DataModel\StringResourceNode;
 use PPP\DataModel\LastNode;
@@ -49,7 +50,11 @@ class LastNodeSimplifierTest extends NodeSimplifierBaseTest {
 			array(
 				new ResourceListNode(array()),
 				new LastNode(new ResourceListNode(array()))
-			)
+			),
+			array(
+				new LastNode(new MissingNode()),
+				new LastNode(new MissingNode())
+			),
 		);
 	}
 }

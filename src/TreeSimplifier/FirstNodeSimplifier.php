@@ -44,11 +44,15 @@ class FirstNodeSimplifier implements NodeSimplifier {
 		$nodeSimplifier = $this->simplifierFactory->newNodeSimplifier();
 		$operand = $nodeSimplifier->simplify($node->getOperand());
 
-		if($operand instanceof ResourceListNode && !$operand->isEmpty()) {
-			$resources = $operand->toArray();
-			return new ResourceListNode(array(reset($resources)));
+		if($operand instanceof ResourceListNode) {
+			if($operand->isEmpty()) {
+				return $operand;
+			} else {
+				$resources = $operand->toArray();
+				return new ResourceListNode(array(reset($resources)));
+			}
 		} else {
-			return $operand;
+			return new FirstNode($operand);
 		}
 	}
 }

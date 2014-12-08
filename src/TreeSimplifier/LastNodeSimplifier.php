@@ -44,11 +44,15 @@ class LastNodeSimplifier implements NodeSimplifier {
 		$nodeSimplifier = $this->simplifierFactory->newNodeSimplifier();
 		$operand = $nodeSimplifier->simplify($node->getOperand());
 
-		if($operand instanceof ResourceListNode && !$operand->isEmpty()) {
-			$resources = $operand->toArray();
-			return new ResourceListNode(array(end($resources)));
+		if($operand instanceof ResourceListNode) {
+			if($operand->isEmpty()) {
+				return $operand;
+			} else {
+				$resources = $operand->toArray();
+				return new ResourceListNode(array(end($resources)));
+			}
 		} else {
-			return $operand;
+			return new LastNode($operand);
 		}
 	}
 }
