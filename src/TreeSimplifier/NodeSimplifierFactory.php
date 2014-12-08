@@ -29,6 +29,9 @@ class NodeSimplifierFactory {
 				array(
 					new IntersectionNodeSimplifier($this),
 					new UnionNodeSimplifier($this),
+					new FirstNodeSimplifier($this),
+					new LastNodeSimplifier($this),
+					new RecursiveSortNodeSimplifier($this),
 					new RecursiveTripleNodeSimplifier($this)
 				)
 			)
