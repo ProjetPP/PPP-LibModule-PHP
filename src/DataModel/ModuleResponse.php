@@ -72,4 +72,17 @@ class ModuleResponse {
 	public function getTrace() {
 		return $this->trace;
 	}
+
+	/**
+	 * Returns if $target is equals to the current response
+	 *
+	 * @param mixed $target
+	 * @return boolean
+	 */
+	public function equals($target) {
+		return $target instanceof self &&
+			$this->languageCode === $target->languageCode &&
+			$this->sentenceTree->equals($target->sentenceTree) &&
+			$this->measures == $target->measures;
+	}
 }
