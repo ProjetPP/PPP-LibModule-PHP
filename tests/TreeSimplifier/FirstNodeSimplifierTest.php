@@ -2,11 +2,11 @@
 
 namespace PPP\Module\TreeSimplifier;
 
+use PPP\DataModel\FirstNode;
 use PPP\DataModel\IntersectionNode;
 use PPP\DataModel\MissingNode;
 use PPP\DataModel\ResourceListNode;
 use PPP\DataModel\StringResourceNode;
-use PPP\DataModel\FirstNode;
 
 /**
  * @covers PPP\Module\TreeSimplifier\FirstNodeSimplifier

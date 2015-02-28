@@ -4,8 +4,8 @@ namespace PPP\Module\TreeSimplifier;
 
 use InvalidArgumentException;
 use PPP\DataModel\AbstractNode;
-use PPP\DataModel\ResourceListNode;
 use PPP\DataModel\FirstNode;
+use PPP\DataModel\ResourceListNode;
 
 /**
  * @licence MIT
