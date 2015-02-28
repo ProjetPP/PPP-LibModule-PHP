@@ -25,6 +25,9 @@ class NodeSimplifierFactory {
 	private function buildNodeSimplifier(array $additionalSimplifiers) {
 		return new DispatchingSimplifier(
 			array_merge(
+				array(
+					new SetOperatorNodeSimplifier()
+				),
 				$additionalSimplifiers,
 				array(
 					new IntersectionNodeSimplifier($this),
