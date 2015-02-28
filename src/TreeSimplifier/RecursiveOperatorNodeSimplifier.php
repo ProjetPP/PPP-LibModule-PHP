@@ -4,14 +4,13 @@ namespace PPP\Module\TreeSimplifier;
 
 use InvalidArgumentException;
 use PPP\DataModel\AbstractNode;
-use PPP\DataModel\ResourceListNode;
-use PPP\DataModel\UnionNode;
+use PPP\DataModel\OperatorNode;
 
 /**
  * @licence MIT
  * @author Thomas Pellissier Tanon
  */
-class UnionNodeSimplifier implements NodeSimplifier {
+class RecursiveOperatorNodeSimplifier implements NodeSimplifier {
 
 	/**
 	 * @var NodeSimplifierFactory
@@ -29,38 +28,26 @@ class UnionNodeSimplifier implements NodeSimplifier {
 	 * @see NodeSimplifier::isSimplifierFor
 	 */
 	public function isSimplifierFor(AbstractNode $node) {
-		return $node instanceof UnionNode;
+		return $node instanceof OperatorNode;
 	}
 
 	/**
 	 * @see NodeSimplifier::simplify
-	 * @param UnionNode $node
+	 * @param OperatorNode $node
 	 */
 	public function simplify(AbstractNode $node) {
 		if(!$this->isSimplifierFor($node)) {
-			throw new InvalidArgumentException('UnionNodeSimplifier can only simplify UnionNode');
+			throw new InvalidArgumentException('RecursiveOperatorNodeSimplifier can only simplify OperatorNode');
 		}
 
 		$nodeSimplifier = $this->simplifierFactory->newNodeSimplifier();
-		$resources = array();
-		$otherOperands = array();
 
+		$operands = array();
 		foreach($node->getOperands() as $operand) {
-			$operand = $nodeSimplifier->simplify($operand);
-			if($operand instanceof ResourceListNode) {
-				$resources[] = $operand;
-			} else {
-				$otherOperands[] = $operand;
-			}
+			$operands[] = $nodeSimplifier->simplify($operand);
 		}
 
-		if(empty($otherOperands)) {
-			return new ResourceListNode($resources);
-		}
-
-		if(!empty($resources)) {
-			$otherOperands[] = new ResourceListNode($resources);
-		}
-		return new UnionNode($otherOperands);
+		$class = get_class($node);
+		return new $class($operands);
 	}
 }

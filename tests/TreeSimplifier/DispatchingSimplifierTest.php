@@ -2,7 +2,7 @@
 
 namespace PPP\Module\TreeSimplifier;
 
-use PPP\DataModel\IntersectionNode;
+use PPP\DataModel\MissingNode;
 use PPP\DataModel\ResourceListNode;
 use PPP\DataModel\StringResourceNode;
 use PPP\DataModel\UnionNode;
@@ -17,7 +17,7 @@ class DispatchingSimplifierTest extends \PHPUnit_Framework_TestCase {
 
 	protected function buildSimplifier() {
 		return new DispatchingSimplifier(array(
-			new UnionNodeSimplifier(new NodeSimplifierFactory())
+			new SetOperatorNodeSimplifier()
 		));
 	}
 
@@ -30,7 +30,7 @@ class DispatchingSimplifierTest extends \PHPUnit_Framework_TestCase {
 	}
 
 	public function testIsNodeSimplifierForReturnsFalse() {
-		$this->assertFalse($this->buildSimplifier()->isSimplifierFor(new IntersectionNode(array())));
+		$this->assertFalse($this->buildSimplifier()->isSimplifierFor(new MissingNode()));
 	}
 
 	public function testSimplification() {
@@ -41,7 +41,7 @@ class DispatchingSimplifierTest extends \PHPUnit_Framework_TestCase {
 			)),
 			$this->buildSimplifier()->simplify(new UnionNode(array(
 				new ResourceListNode(array(new StringResourceNode('foo'))),
-					new ResourceListNode(array(new StringResourceNode('bar')))
+				new ResourceListNode(array(new StringResourceNode('bar')))
 			)))
 		);
 	}

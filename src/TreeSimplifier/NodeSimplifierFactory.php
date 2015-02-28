@@ -30,10 +30,10 @@ class NodeSimplifierFactory {
 				),
 				$additionalSimplifiers,
 				array(
-					new IntersectionNodeSimplifier($this),
-					new UnionNodeSimplifier($this),
 					new FirstNodeSimplifier($this),
 					new LastNodeSimplifier($this),
+					new RecursiveOperatorNodeSimplifier($this),
+					new SetOperatorNodeSimplifier(),
 					new RecursiveSortNodeSimplifier($this),
 					new RecursiveTripleNodeSimplifier($this)
 				)
