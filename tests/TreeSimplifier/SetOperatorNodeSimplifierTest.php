@@ -8,6 +8,7 @@ use PPP\DataModel\LastNode;
 use PPP\DataModel\MissingNode;
 use PPP\DataModel\ResourceListNode;
 use PPP\DataModel\StringResourceNode;
+use PPP\DataModel\TripleNode;
 use PPP\DataModel\UnionNode;
 
 /**
@@ -165,6 +166,44 @@ class SetOperatorNodeSimplifierTest extends NodeSimplifierBaseTest {
 					new UnionNode(array(
 						new ResourceListNode(array(new StringResourceNode('baz')))
 					)),
+				))
+			),
+			array(
+				new UnionNode(array(
+					new TripleNode(
+						new MissingNode(),
+						new ResourceListNode(array(
+							new StringResourceNode('bar'),
+							new StringResourceNode('baz'))
+						),
+						new ResourceListNode(array(new StringResourceNode('foo')))
+					),
+					new TripleNode(
+						new ResourceListNode(array(new StringResourceNode('foo'))),
+						new ResourceListNode(array(
+							new StringResourceNode('bar1'),
+							new StringResourceNode('baz1'))
+						),
+						new MissingNode()
+					)
+				)),
+				new UnionNode(array(
+					new TripleNode(
+						new MissingNode(),
+						new ResourceListNode(array(
+							new StringResourceNode('bar'),
+							new StringResourceNode('baz'))
+						),
+						new ResourceListNode(array(new StringResourceNode('foo')))
+					),
+					new TripleNode(
+						new ResourceListNode(array(new StringResourceNode('foo'))),
+						new ResourceListNode(array(
+							new StringResourceNode('bar1'),
+							new StringResourceNode('baz1'))
+						),
+						new MissingNode()
+					)
 				))
 			)
 		);
