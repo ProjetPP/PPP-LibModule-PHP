@@ -179,7 +179,7 @@ class SetOperatorNodeSimplifierTest extends NodeSimplifierBaseTest {
 						new ResourceListNode(array(new StringResourceNode('foo')))
 					),
 					new TripleNode(
-						new ResourceListNode(array(new StringResourceNode('foo')))
+						new ResourceListNode(array(new StringResourceNode('foo'))),
 						new ResourceListNode(array(
 							new StringResourceNode('bar1'),
 							new StringResourceNode('baz1'))
@@ -197,7 +197,7 @@ class SetOperatorNodeSimplifierTest extends NodeSimplifierBaseTest {
 						new ResourceListNode(array(new StringResourceNode('foo')))
 					),
 					new TripleNode(
-						new ResourceListNode(array(new StringResourceNode('foo')))
+						new ResourceListNode(array(new StringResourceNode('foo'))),
 						new ResourceListNode(array(
 							new StringResourceNode('bar1'),
 							new StringResourceNode('baz1'))
